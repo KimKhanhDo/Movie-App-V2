@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 
-import MovieCard from "./MovieCard";
+import MovieCard from "@components/MovieCard";
 
 function MediaList({ title, tabs }) {
     const [mediaList, setMediaList] = useState([]);
@@ -51,6 +51,7 @@ function MediaList({ title, tabs }) {
                 {mediaList.map((media) => (
                     <MovieCard
                         key={media.id}
+                        id={media.id}
                         title={media.title || media.name}
                         releaseDate={media.release_date || media.first_air_date}
                         poster={media.poster_path}

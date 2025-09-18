@@ -17,6 +17,7 @@ function FeatureMovies() {
         }).then(async (res) => {
             const data = await res.json();
             const popularMovies = data.results.slice(0, 4);
+
             setMovies(popularMovies);
             setActiveMovieId(popularMovies[0].id);
         });

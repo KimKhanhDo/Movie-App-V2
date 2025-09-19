@@ -1,11 +1,22 @@
+import { useModalContext } from "@/context/ModalProvider";
 import ImageComponent from "@/Image";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 function Movie(props) {
     const {
-        data: { backdrop_path, title, release_date, overview },
+        data: {
+            id,
+            backdrop_path,
+            title,
+            release_date,
+            overview,
+            trailerVideoKey,
+        },
     } = props;
+
+    const { openPopUp } = useModalContext();
 
     return (
         <div>
@@ -30,12 +41,26 @@ function Movie(props) {
                         <p>{overview}</p>
                     </div>
                     <div className="mt-4">
-                        <button className="text-10 mr-2 rounded bg-white px-4 py-2 text-black lg:text-lg">
+                        <button
+                            className="text-10 mr-2 cursor-pointer rounded bg-white px-4 py-2 text-black lg:text-lg"
+                            onClick={() =>
+                                openPopUp(
+                                    <iframe
+                                        title="Trailer"
+                                        src={`https://www.youtube.com/embed/${trailerVideoKey}`}
+                                        className="aspect-video w-[50vw]"
+                                    />,
+                                )
+                            }
+                        >
                             <FontAwesomeIcon icon={faPlay} /> Trailer
                         </button>
-                        <button className="text-10 rounded bg-slate-300/35 px-4 py-2 lg:text-lg">
-                            View Detail
-                        </button>
+
+                        <Link to={`/movie/${id}`}>
+                            <button className="text-10 cursor-pointer rounded bg-slate-300/35 px-4 py-2 lg:text-lg">
+                                View Detail
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

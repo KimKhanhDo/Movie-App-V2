@@ -5,7 +5,7 @@ import Image from "@/Image";
 function MovieCard({ title, releaseDate, poster, point, mediaType, id }) {
     return (
         <Link
-            to={`/movie/${id}`}
+            to={mediaType === "tv" ? `/tv/${id}` : `/movie/${id}`}
             className="rounded-lg border border-slate-800"
         >
             <div className="relative">

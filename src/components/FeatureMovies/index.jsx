@@ -8,7 +8,7 @@ function FeatureMovies() {
     const [activeMovieId, setActiveMovieId] = useState();
 
     const { data: popularMoviesResponse } = useFetch({
-        url: "/movie/popular",
+        url: "/discover/movie?include_adult=false&language=en-US&page=1&sort_by=popularity.desc&include_video=true",
     });
 
     const movies = (popularMoviesResponse.results || []).slice(0, 4);
@@ -20,12 +20,30 @@ function FeatureMovies() {
         if (movies[0]?.id) setActiveMovieId(movies[0].id);
     }, [JSON.stringify(movies)]);
 
+    // khi có dữ liệu activeMovieId mới thực hiện gọi API
+    const { data: videoResponse } = useFetch(
+        {
+            url: `/movie/${activeMovieId}/videos`,
+        },
+        { enabled: !!activeMovieId },
+    );
+
     return (
         <div className="relative text-white">
             {movies
                 .filter((movie) => movie.id === activeMovieId)
                 .map((movie) => (
-                    <Movie key={movie.id} data={movie} />
+                    <Movie
+                        key={movie.id}
+                        data={movie}
+                        trailerVideoKey={
+                            (videoResponse?.results || []).find(
+                                (video) =>
+                                    video.type === "Trailer" &&
+                                    video.site === "YouTube",
+                            )?.key
+                        }
+                    />
                 ))}
 
             <PaginateIndicator

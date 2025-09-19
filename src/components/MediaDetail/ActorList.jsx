@@ -17,11 +17,12 @@ function ActorList({ actors = [] }) {
                         name={actor.name}
                         character={actor.character}
                         profilePath={actor.profile_path}
+                        episodeCount={actor.episodeCount}
                     />
                 ))}
             </div>
             <p
-                className="mt-1 cursor-pointer"
+                className="mt-2 cursor-pointer"
                 onClick={() => setIsShowMore(!isShowMore)}
             >
                 {isShowMore ? "Show Less" : "Show More"}

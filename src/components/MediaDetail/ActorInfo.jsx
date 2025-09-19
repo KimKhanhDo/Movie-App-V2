@@ -1,7 +1,9 @@
+import ImageComponent from "@/Image";
+
 function ActorInfo({ id, name, character, profilePath }) {
     return (
         <div className="rounded-lg border border-slate-300 bg-black shadow-sm">
-            <img
+            <ImageComponent
                 className="rounded-lg"
                 src={
                     profilePath
@@ -9,6 +11,8 @@ function ActorInfo({ id, name, character, profilePath }) {
                         : "/ActorNoImage.svg"
                 }
                 alt={name}
+                width={276}
+                height={350}
             />
             <div className="p-3">
                 <p className="font-bold">{name}</p>

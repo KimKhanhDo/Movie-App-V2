@@ -1,27 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Movie from "./Movie";
 import PaginateIndicator from "./PaginateIndicator";
+import useFetch from "@/hooks/useFetch";
 
 function FeatureMovies() {
-    const [movies, setMovies] = useState([]);
     const [activeMovieId, setActiveMovieId] = useState();
 
-    useEffect(() => {
-        fetch("https://api.themoviedb.org/3/movie/popular", {
-            method: "GET",
-            headers: {
-                accept: "application/json",
-                Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTY0NTUyODc1ZTExOTM0ZjllM2I2Nzg4YzNkZGRjNSIsIm5iZiI6MTc0MjA4NzY0OC4zMTgsInN1YiI6IjY3ZDYyNWUwMTkxODY4YzU0ZmYxNzM3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VjqH79JJ_bvTcLGIUR1aRQhOkoIJqBc7_d49qctYNbY",
-            },
-        }).then(async (res) => {
-            const data = await res.json();
-            const popularMovies = data.results.slice(0, 4);
+    const { data: popularMoviesResponse } = useFetch({
+        url: "/movie/popular",
+    });
 
-            setMovies(popularMovies);
-            setActiveMovieId(popularMovies[0].id);
-        });
-    }, []);
+    const movies = (popularMoviesResponse.results || []).slice(0, 4);
+
+    // Sau khi React render xong UI → mới chạy useEffect
+    // Trong useEffect gọi setActiveMovieId(movies[0].id) → React re-render một lần duy nhất.
+    // 👉 Tại lần re-render tiếp theo, nếu movies không đổi thì JSON.stringify(movies) cũng không đổi → useEffect KHÔNG chạy lại → không có loop.
+    useEffect(() => {
+        if (movies[0]?.id) setActiveMovieId(movies[0].id);
+    }, [JSON.stringify(movies)]);
 
     return (
         <div className="relative text-white">

@@ -15,7 +15,7 @@ function MovieCard({ title, releaseDate, poster, point, mediaType, id }) {
                     </p>
                 )}
                 <Image
-                    src={`https://image.tmdb.org/t/p/w500${poster}`}
+                    src={poster && `https://image.tmdb.org/t/p/w500${poster}`}
                     alt={title}
                     width={210}
                     height={300}

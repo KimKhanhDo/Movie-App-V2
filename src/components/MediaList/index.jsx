@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import clsx from "clsx";
 
 import MovieCard from "@components/MovieCard";
 import useFetch from "@/hooks/useFetch";
 
 function MediaList({ title, tabs }) {
-    const [activeTabId, setActiveTabId] = useState(tabs[0]?.id);
+    // 1) Đọc/ghi query param ?tab=...
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // 2) Lấy tab hiện tại từ URL, fallback về tab đầu tiên
+    const activeTabId = searchParams.get("tab") ?? tabs[0]?.id;
 
     const url = tabs.find((tab) => tab.id === activeTabId)?.url;
     const { data } = useFetch({ url });
@@ -26,7 +30,7 @@ function MediaList({ title, tabs }) {
                                     ? "bg-white text-black"
                                     : "text-white",
                             )}
-                            onClick={() => setActiveTabId(tab.id)}
+                            onClick={() => setSearchParams({ tab: tab.id })}
                         >
                             {tab.name}
                         </li>

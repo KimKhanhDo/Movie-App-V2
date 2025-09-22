@@ -15,7 +15,6 @@ function TVShowDetail() {
     const { data: tvInfo, isLoading } = useFetch({
         url: `/tv/${id}?append_to_response=content_ratings,aggregate_credits,videos`,
     });
-    console.log("🚀 ~ TVShowDetail ~ tvInfo:", tvInfo);
 
     // fetch Recommendations
     const {
@@ -69,7 +68,7 @@ function TVShowDetail() {
                 }
             />
             <div className="bg-black text-[1.2vw] text-white">
-                <div className="mx-auto flex max-w-screen-xl gap-6 px-6 py-10 sm:gap-8">
+                <div className="container">
                     <div className="flex-[2]">
                         <ActorList
                             actors={(tvInfo.aggregate_credits?.cast || []).map(
@@ -88,6 +87,7 @@ function TVShowDetail() {
                         <RelatedMediaList
                             mediaList={relatedTVShow}
                             isLoading={isRecommendationLoading}
+                            title="More Like This"
                         />
                     </div>
                     <div className="flex-1">

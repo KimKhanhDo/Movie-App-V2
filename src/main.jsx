@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import RootLayout from "@pages/RootLayout.jsx";
 import ModalProvider from "@context/ModalProvider";
+import SearchPage from "@pages/SearchPage";
 
 // Lazy import
 const MovieDetail = lazy(() => import("@pages/MovieDetail.jsx"));
@@ -31,6 +32,8 @@ const router = createBrowserRouter([
             {
                 path: "/people/:id",
                 element: <PeoplePage />,
+                // loader = hàm bất đồng bộ để chuẩn bị dữ liệu cho route. Chạy trước khi render component.
+                // Kết hợp với useLoaderData() để lấy dữ liệu trong component.
                 loader: async ({ params }) => {
                     const res = await fetch(
                         `https://api.themoviedb.org/3/person/${params.id}?append_to_response=combined_credits`,
@@ -44,6 +47,10 @@ const router = createBrowserRouter([
                     return res;
                 },
             },
+            {
+                path: "/search",
+                element: <SearchPage />,
+            },
         ],
     },
 ]);
@@ -53,6 +60,5 @@ createRoot(document.getElementById("root")).render(
         <ModalProvider>
             <RouterProvider router={router} />
         </ModalProvider>
-        ,
     </StrictMode>,
 );

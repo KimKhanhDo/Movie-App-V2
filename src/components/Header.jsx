@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 
 export default function Header() {
     return (
@@ -14,18 +14,20 @@ export default function Header() {
                     />
                 </Link>
 
-                <a href="#" className="lg:text-xl">
+                <Link to="/search?mediaType=movie" className="lg:text-xl">
                     Movies
-                </a>
-                <a href="#" className="lg:text-xl">
-                    TV Shows
-                </a>
+                </Link>
+                <Link to="/search?mediaType=tv" className="lg:text-xl">
+                    TV Show
+                </Link>
             </div>
             <div>
-                <FontAwesomeIcon
-                    icon={faMagnifyingGlass}
-                    className="cursor-pointer"
-                />
+                <Link to="/search">
+                    <FontAwesomeIcon
+                        icon={faMagnifyingGlass}
+                        className="cursor-pointer"
+                    />
+                </Link>
             </div>
         </header>
     );

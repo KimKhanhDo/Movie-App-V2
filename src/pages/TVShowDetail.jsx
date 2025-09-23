@@ -88,6 +88,7 @@ function TVShowDetail() {
                             mediaList={relatedTVShow}
                             isLoading={isRecommendationLoading}
                             title="More Like This"
+                            className="mt-6"
                         />
                     </div>
                     <div className="flex-1">

@@ -5,6 +5,7 @@ import ImageComponent from "@/Image";
 import { GENDER_MAPPING } from "@/libs/constants";
 
 function PeoplePage() {
+    // dùng hook useLoaderData() để lấy dữ liệu mà loader đã fetch ở main.jsx
     const peopleInfo = useLoaderData();
 
     return (

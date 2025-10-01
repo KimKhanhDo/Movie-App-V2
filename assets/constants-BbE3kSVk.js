@@ -1,0 +1,1 @@
+const e=[{id:"all",name:"All",url:"/trending/all/day"},{id:"movie",name:"Movies",url:"/trending/movie/day"},{id:"tv",name:"TV Show",url:"/trending/tv/day"}],a=[{id:"movie",name:"Movies",url:"/movie/top_rated"},{id:"tv",name:"TV Show",url:"/tv/top_rated"}],t={0:"Not set/ not specified",1:"Female",2:"Male",3:"Non-binary"};export{t as G,e as T,a};

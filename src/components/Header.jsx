@@ -8,8 +8,8 @@ export default function Header() {
             <div className="flex items-center gap-4 lg:gap-6">
                 <Link to="/">
                     <img
-                        src="/netflix.png"
-                        alt=""
+                        src="netflix.png"
+                        alt="logo"
                         className="w-16 cursor-pointer sm:w-28"
                     />
                 </Link>

@@ -1,6 +1,6 @@
 import { lazy, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import RootLayout from "@pages/RootLayout.jsx";
@@ -13,7 +13,7 @@ const TVShowDetail = lazy(() => import("@pages/TVShowDetail.jsx"));
 const HomePage = lazy(() => import("@pages/HomePage.jsx"));
 const PeoplePage = lazy(() => import("@pages/PeoplePage.jsx"));
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         element: <RootLayout />,
         children: [
